@@ -1,0 +1,18 @@
+.analysis-selctor {
+
+
+    .analysis-selector--label {
+        margin-left: 2rem;
+        margin-bottom: 0.5rem;
+        text-align: left;
+        font-size: small;
+        font-weight: 800;
+    }
+
+
+    .analysis-selector--dropdown{
+        width: 12rem;
+        margin-left: 2rem;
+    }
+
+}
