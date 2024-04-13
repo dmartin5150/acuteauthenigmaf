@@ -5,14 +5,22 @@
 .App-header {
   display: flex;
   background-color:white;
-  color: black;
+  color: white;
   justify-content: space-between;
-  padding:3rem;
+  padding:0.5rem;
+  background-color: rgb(38, 0, 255);
+
+  h1 {
+    margin-left:50rem;
+  }
+
+
 
   .App-header--Analysis {
     display: flex;
     justify-content: right;
     align-items: center;
+    margin-right:3rem;
   }
 }
 
