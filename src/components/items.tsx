@@ -4,21 +4,27 @@ import { DndItemProps } from "./DndList";
 export const items: DndItemProps[] = [
   {
     id: 1,
-    name: "Apple",
-  },
-  {
-    id: 2,
-    name: "Dragonfruit",
-    onClick: () => alert("Eat Dragonfruit!"),
+    name: "TAO",
     selected: true,
   },
   {
+    id: 2,
+    name: "Department"
+  },
+  {
     id: 3,
-    name: "Lychee",
+    name: "Genus",
   },
   {
     id: 4,
-    name: "Banana is disabled",
-    disabled: true,
+    name: "Order Name",
+  },
+  {
+    id: 5,
+    name: "Bucket",
+  },
+  {
+    id: 6,
+    name: "Provider",
   },
 ];
