@@ -5,10 +5,15 @@ import FilterPanel from './components/FilterPanel';
 import { itemProps, items } from './components/items';
 import ResultsPanel from './components/ResultsPanel';
 import AppPanel from './components/AppPanel';
+import Select from 'react-select';
+import { OptionType } from './components/FilterPanel';
 
 
-
-
+const filterOptions: OptionType[]= [
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' }
+]
 
 
 function App() {
@@ -59,8 +64,8 @@ function App() {
           />
           <AppPanel items={listItems} />
         </div>
-        {/* <ResultsPanel items={listItems} /> */}
       </div>
+
 
     </div>
   );
