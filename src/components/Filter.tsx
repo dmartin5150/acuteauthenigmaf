@@ -18,7 +18,6 @@ interface FilterProps {
 
 const Filter: FC<FilterProps> = ({name, isDisabled, options}) => {
 
-    // const [selectedValue, setSelectedValue] = useState<{label:string, value:string}[]>(options);
     const [selectedValue, setSelectedValue] = useState<MultiValue<SelectOptions>>([options[0]]);
 
 
