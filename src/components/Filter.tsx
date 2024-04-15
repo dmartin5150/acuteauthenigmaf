@@ -1,27 +1,30 @@
-import React, {FC} from "react";
-import { DndItemProps } from "./DndList";
-import './Filter.css'
+import React, {FC} from 'react';
+import Select from 'react-select';
+import './Filter.css';
 
 
+type SelectOptions = {
+    label: string;
+    value: string;
+}
 
 
+interface FilterProps {
+    id: number;
+    name:string;
+    isDisabled:boolean;
+    options: SelectOptions[]
+}
 
-const Filter: FC<DndItemProps> = (props) => {
-    const {name, id} = props;
+const Filter: FC<FilterProps> = ({name, isDisabled, options}) => {
     return (
-        <div id={id as string} className='filter'>
-            <div className='filter-name'>
-                <h3>{name}</h3>
+        <div className='filter'>
+            <label>{name}</label>
+            <div className='filter-select'>
+                <Select options={options}   isDisabled={isDisabled}/>  
             </div>
-            <label>
-                <input type="checkbox" />
-                Enable Filter
-            </label>
-            <label>
-                <input type="checkbox" />
-                Show Results
-            </label>
         </div>
+
     )
 }
-export default Filter;
+export default Filter

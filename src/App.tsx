@@ -1,39 +1,46 @@
-import React, {useState} from 'react';
-import AnalysisSelector from './components/AnalysisSelector';
-import Select from 'react-select'
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import FilterList from './components/FilterList';
+import FilterPanel from './components/FilterPanel';
+import { itemProps, items } from './components/items';
 
 
 
 
-
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' }
-]
 
 
 function App() {
+  const [listItems, setListItems] = useState<itemProps[]>(items);
 
 
+  const onItemsChanged = (items:itemProps[]) => {
+    setListItems(items);
+  }
 
+  const handleFilteredStatusChanged = (id:number, value: boolean) => {
+    const newItems = listItems.map(item => {
+      if (item.id === id) {
+          return { ...item, isDisabled: !value };
+      }
+          return item;
+      });
+      setListItems(newItems)
+    }
 
-
-
+  useEffect(()=> {
+    console.log(listItems)
+  }, [listItems])
 
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>Acute Auth Enigma</h1>
-        <div className='App-header--Analysis'>
-          <AnalysisSelector />
-        </div>
       </header>
-      <Select options={options} />
-      <FilterList />
+      <div className='App-filters'>
+        <FilterList items={listItems} onItemsChanged={onItemsChanged} onFilterStatusChanged={handleFilteredStatusChanged}/>
+        <FilterPanel items={listItems} />
+      </div>
     </div>
   );
 }

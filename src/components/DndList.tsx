@@ -2,26 +2,28 @@ import { FC, ReactNode } from "react";
 import { DndContext, DndContextProps, UniqueIdentifier } from "@dnd-kit/core";
 import { SortableContext, SortingStrategy } from "@dnd-kit/sortable";
 import { SortableItem } from "./SortableItem";
-import Filter from "./Filter";
+import FilterStatus from "./FilterStatus";
+import { itemProps } from "./items";
 
 export interface DndItemProps {
   id: UniqueIdentifier;
   children?: ReactNode;
-  name?: string | ReactNode;
+  name: string;
   icon?: ReactNode;
   selected?: boolean;
   disabled?: boolean;
 }
 interface DndProps extends DndContextProps {
-  items: DndItemProps[];
+  items: itemProps[];
   strategy?: SortingStrategy;
-  onClickElement: (id:number) => void;
+  onFilterStatusChanged: (id:number, status:boolean) => void;
 }
 
 
 export const DndList: FC<DndProps> = (props) => {
   const {
     items,
+    onFilterStatusChanged,
     strategy,
     modifiers,
     collisionDetection,
@@ -31,10 +33,6 @@ export const DndList: FC<DndProps> = (props) => {
   } = props;
 
 
-const onClick = (event: React.MouseEvent<HTMLButtonElement> ) => {
-    const target = event.target as HTMLButtonElement;
-    console.log('id = ', target.id)
-}
 
 
   return (
@@ -47,15 +45,11 @@ const onClick = (event: React.MouseEvent<HTMLButtonElement> ) => {
     >
       <SortableContext items={items} strategy={strategy}>
         {items.map((item) => {
-          const { id, name, icon, selected, disabled } = item;
+          const { id, name, isDisabled} = item;
           return (
-              <SortableItem key={id} id={id} disabled={disabled}  >
-                <div className={id as string}  >
-                  <div>
-                    {/* <h2>{name}</h2> */}
-                    <Filter id={id} name={name} />
-                  </div>
-
+              <SortableItem key={id} id={id} name={name}  >
+                <div>
+                  <FilterStatus id={id} name={name} isDisabled={isDisabled} onFilterStatusChanged={onFilterStatusChanged}/>
                 </div>
               </SortableItem>
           );

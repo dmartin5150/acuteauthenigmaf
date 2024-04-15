@@ -1,28 +1,29 @@
 .App {
   text-align: center;
   padding:0.5rem;
-}
-
-.App-header {
-  display: flex;
-  background-color:white;
-  color: white;
-  justify-content: space-between;
-  padding:0.5rem;
-  background-color: rgb(38, 0, 255);
-
-  h1 {
-    margin-left:50rem;
-  }
 
 
-
-  .App-header--Analysis {
+  .App-header {
     display: flex;
-    justify-content: right;
-    align-items: center;
-    margin-right:3rem;
+    background-color:white;
+    color: white;
+    justify-content: space-between;
+    padding:0.5rem;
+    background-color: rgb(38, 0, 255);
+  
+    h1 {
+      margin-left:50rem;
+    }
+  } 
+
+  .App-filters {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
   }
+
+
+
 }
 
 

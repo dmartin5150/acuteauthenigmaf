@@ -1,13 +1,16 @@
 .filter {
-    display: flex;
+    display:flex;
+    flex-direction: column;
+    justify-items: center;
     align-items: center;
-    justify-content: space-around;
-    flex-direction: row;
-    border: 1px solid black;
-    width: 30rem;
+    width:14.5rem;
 
-    .filter-name {
-        width: 10rem;
+    label {
+        font-weight: bold;
+    }
+
+    .filter-select{
+        width:14.5rem;
     }
 
 }

@@ -1,5 +1,7 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useState, useEffect} from 'react';
 import './FilterList.css';
+import FilterPanel from './FilterPanel';
+import { itemProps } from './items';
 
 import {
     closestCenter,
@@ -24,14 +26,19 @@ import {
   
   
   
-  import { items } from './items';
-  import { DndList, DndItemProps } from './DndList';
+  import { DndList } from './DndList';
+import { on } from 'events';
+
+
+type FilterListProps = {
+    items: itemProps[];
+    onItemsChanged: (items:itemProps[]) => void;
+    onFilterStatusChanged: (id:number, status:boolean) => void;
+}
 
 
 
-
-
-const FilterList = () => {
+const FilterList: FC<FilterListProps> = ({items, onItemsChanged,onFilterStatusChanged}) => {
     const [listItems, setListItems] = useState(items);
     const keyboardSensor = useSensor(KeyboardSensor, {
         coordinateGetter: sortableKeyboardCoordinates,
@@ -45,7 +52,7 @@ const FilterList = () => {
       const sensors = useSensors(keyboardSensor, pointerSensor, mouseSensor);
       const onDragEnd = (event: DragEndEvent) => {
         const { active, over } = event;
-        const orderedItems = (currItems: DndItemProps[]) => {
+        const orderedItems = (currItems: itemProps[]) => {
           const activeIndex = currItems.findIndex((item) => item.id === active.id);
           const overIndex = currItems.findIndex((item) => item.id === over?.id);
           return arrayMove(currItems, activeIndex, overIndex);
@@ -54,23 +61,30 @@ const FilterList = () => {
             setListItems(orderedItems);
         }
     };
+
+    useEffect(() => {
+        onItemsChanged(listItems)
+    },[listItems])
       
     const updateItem = (itemId:number) => {
         console.log(itemId)
     }
 
+
+
+
     return (
         <div className='filterlist'>
-            <h3 className='filterlist-header'>Filters</h3>
-            <DndList
-            sensors={sensors}
-            onDragEnd={onDragEnd}
-            items={listItems}
-            onClickElement={updateItem}
-            strategy={verticalListSortingStrategy}
-            modifiers={[restrictToParentElement, restrictToVerticalAxis]}
-            collisionDetection={closestCenter}
-        />
+                <h3 className='filterlist-header'>Filters</h3>
+                <DndList
+                sensors={sensors}
+                onDragEnd={onDragEnd}
+                onFilterStatusChanged={onFilterStatusChanged}
+                items={listItems}
+                strategy={verticalListSortingStrategy}
+                modifiers={[restrictToParentElement, restrictToVerticalAxis]}
+                collisionDetection={closestCenter}
+            />
         </div>
 
     )
