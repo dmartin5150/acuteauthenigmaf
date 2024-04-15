@@ -1,16 +1,17 @@
 import React, {FC, useState, useEffect} from "react";
-import { DndItemProps } from "./DndList";
+
 import './FilterStatus.css'
 import { itemProps } from "./items";
 
 
 type FilterStatusProps = itemProps & {
     onFilterStatusChanged: (id:number, status:boolean) => void;
+    onShowResultsChanged: (id:number, status:boolean) => void;
 }
 
 
 const FilterStatus: FC<FilterStatusProps> = (props) => {
-    const {name, id, onFilterStatusChanged} = props;
+    const {name, id, onFilterStatusChanged, onShowResultsChanged} = props;
     const [isEnabled,setIsEnabled] = useState<boolean>(false);
     const [showResults, setShowResults] = useState<boolean>(true);
     const [filterId, setFilterId] = useState<string>("")
@@ -23,20 +24,21 @@ const FilterStatus: FC<FilterStatusProps> = (props) => {
     }
 
     const changeShowResults = () => {
-        setShowResults(!showResults)
+        setShowResults(!showResults);
     }
 
     useEffect(() => {
-        setFilterId(id.toString())
+        setFilterId(id.toString());
     },[])
 
     useEffect(() => {
-        console.log('id = ', filterId, 'isEnabled = ', isEnabled)
-        onFilterStatusChanged(id, isEnabled)
+        console.log('id = ', filterId, 'isEnabled = ', isEnabled);
+        onFilterStatusChanged(id, isEnabled);
     },[isEnabled,id])
 
     useEffect(()=> {
-        console.log('id = ', filterId, 'show results = ', showResults)
+        console.log('id = ', filterId, 'show results = ', showResults);
+        onShowResultsChanged(id, showResults);
     },[showResults,id])
 
     return (

@@ -5,18 +5,12 @@ import { SortableItem } from "./SortableItem";
 import FilterStatus from "./FilterStatus";
 import { itemProps } from "./items";
 
-export interface DndItemProps {
-  id: UniqueIdentifier;
-  children?: ReactNode;
-  name: string;
-  icon?: ReactNode;
-  selected?: boolean;
-  disabled?: boolean;
-}
+
 interface DndProps extends DndContextProps {
   items: itemProps[];
   strategy?: SortingStrategy;
   onFilterStatusChanged: (id:number, status:boolean) => void;
+  onShowResultsChanged: (id:number, status:boolean) => void;
 }
 
 
@@ -24,6 +18,7 @@ export const DndList: FC<DndProps> = (props) => {
   const {
     items,
     onFilterStatusChanged,
+    onShowResultsChanged,
     strategy,
     modifiers,
     collisionDetection,
@@ -45,11 +40,18 @@ export const DndList: FC<DndProps> = (props) => {
     >
       <SortableContext items={items} strategy={strategy}>
         {items.map((item) => {
-          const { id, name, isDisabled} = item;
+          const { id, name, showResults, isDisabled} = item;
           return (
-              <SortableItem key={id} id={id} name={name}  >
+              <SortableItem key={id} id={id} name={name} >
                 <div>
-                  <FilterStatus id={id} name={name} isDisabled={isDisabled} onFilterStatusChanged={onFilterStatusChanged}/>
+                  <FilterStatus 
+                    id={id} 
+                    name={name} 
+                    isDisabled={isDisabled} 
+                    showResults={showResults} 
+                    onFilterStatusChanged={onFilterStatusChanged}
+                    onShowResultsChanged={onShowResultsChanged}
+                  />
                 </div>
               </SortableItem>
           );

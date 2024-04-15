@@ -34,11 +34,12 @@ type FilterListProps = {
     items: itemProps[];
     onItemsChanged: (items:itemProps[]) => void;
     onFilterStatusChanged: (id:number, status:boolean) => void;
+    onShowResultsChanged: (id:number, status:boolean) => void;
 }
 
 
 
-const FilterList: FC<FilterListProps> = ({items, onItemsChanged,onFilterStatusChanged}) => {
+const FilterList: FC<FilterListProps> = ({items, onItemsChanged,onFilterStatusChanged,onShowResultsChanged}) => {
     const [listItems, setListItems] = useState(items);
     const keyboardSensor = useSensor(KeyboardSensor, {
         coordinateGetter: sortableKeyboardCoordinates,
@@ -80,6 +81,7 @@ const FilterList: FC<FilterListProps> = ({items, onItemsChanged,onFilterStatusCh
                 sensors={sensors}
                 onDragEnd={onDragEnd}
                 onFilterStatusChanged={onFilterStatusChanged}
+                onShowResultsChanged={onShowResultsChanged}
                 items={listItems}
                 strategy={verticalListSortingStrategy}
                 modifiers={[restrictToParentElement, restrictToVerticalAxis]}

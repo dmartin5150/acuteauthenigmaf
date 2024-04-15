@@ -16,11 +16,21 @@
     }
   } 
 
-  .App-filters {
-    display: flex;
+
+  .App-panel {
+    display:flex;
     flex-direction: row;
-    align-items: start;
+
+    .App-filters {
+      display: flex;
+      flex-direction: row;
+      align-items: start;
+    }
+
+
   }
+
+
 
 
 

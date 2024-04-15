@@ -1,9 +1,17 @@
+import { FC, ReactNode} from 'react';
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { DndItemProps } from "./DndList";
+// import { DndItemProps } from "./DndList";
+import { itemProps } from "./items";
 
-export const SortableItem = (props: DndItemProps) => {
-  const { id, children, disabled } = props;
+type SortableItemProps = {
+  id:number;
+  name:string;
+  children:ReactNode;
+}
+
+export const SortableItem: FC<SortableItemProps> = (props) => {
+  const { id,name, children} = props;
   const {
     attributes,
     listeners,
@@ -13,8 +21,7 @@ export const SortableItem = (props: DndItemProps) => {
     isDragging,
     active,
   } = useSortable({
-    id,
-    disabled,
+    id
   });
   const isActiveItem = isDragging && active?.id === id;
   const style = {
@@ -22,7 +29,7 @@ export const SortableItem = (props: DndItemProps) => {
     transition,
     boxShadow: isDragging ? "5px 5px 10px 0px grey" : "none",
     backgroundColor: isActiveItem ? "lightgrey" : "initial",
-    color: disabled ? "grey" : "initial",
+    // color: disabled ? "grey" : "initial",
   };
 
   return (
