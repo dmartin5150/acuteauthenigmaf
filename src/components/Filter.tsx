@@ -1,9 +1,9 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useState, useEffect} from 'react';
 import Select, {SingleValue, MultiValue, ActionMeta}  from 'react-select';
 import './Filter.css';
 import { OptionType } from './FilterPanel';
 
-type SelectOptions = {
+export type SelectOptions = {
     label: string;
     value: string;
 }
@@ -13,18 +13,30 @@ interface FilterProps {
     id: number;
     name:string;
     isDisabled:boolean;
-    options: SelectOptions[]
+    options: SelectOptions[];
+    onResultsChanged: (id:number, value:string[]) => void;
 }
 
-const Filter: FC<FilterProps> = ({name, isDisabled, options}) => {
+const Filter: FC<FilterProps> = ({id, name, isDisabled, options,onResultsChanged}) => {
 
-    const [selectedValue, setSelectedValue] = useState<MultiValue<SelectOptions>>([options[0]]);
+    const [selectedValue, setSelectedValue] = useState<MultiValue<SelectOptions>>([]);
+    const [filterId, setFilterId] = useState<number>(0);
+
+
+
+    useEffect(() => {
+        setFilterId(id)
+    },[])
 
 
     const handleChange = (newValue: MultiValue<SelectOptions>, actionMeta: ActionMeta<SelectOptions>) => {
-        setSelectedValue(newValue)
+        if(filterId !== 0) {
+            setSelectedValue(newValue);
+            const curResults = newValue.map((item) => {return item.value})
+            onResultsChanged(filterId, curResults);
+        }
     };
-  
+
 
     return (
         <div className='filter'>
@@ -39,8 +51,6 @@ const Filter: FC<FilterProps> = ({name, isDisabled, options}) => {
                 />  
             </div>
         </div>
-
-
     )
 }
 export default Filter

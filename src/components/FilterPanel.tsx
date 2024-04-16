@@ -18,16 +18,23 @@ const filterOptions: OptionType[]= [
 
 type FilterPanelProps = {
     items: itemProps[];
+    onResultsChanged: (id:number, value:string[]) => void;
 }
 
 
-const FilterPanel: FC<FilterPanelProps> = ({items}) => {
+const FilterPanel: FC<FilterPanelProps> = ({items, onResultsChanged}) => {
     return (
         <div className='filterpanel'>
         {items.map((item) => {
             const { id, name, isDisabled, options } = item;
             return (
-                <Filter id={id} key={id}  name={name} isDisabled={isDisabled} options={filterOptions} />
+                <Filter 
+                  id={id} 
+                  key={id}  
+                  name={name} 
+                  isDisabled={isDisabled}
+                   options={options ? options : [{label: 'All', value:'All'}]}
+                   onResultsChanged={onResultsChanged} />
             );
           })}
         </div>

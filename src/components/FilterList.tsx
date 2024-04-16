@@ -1,6 +1,5 @@
-import React, {FC, useState, useEffect} from 'react';
+import {FC, useState, useEffect} from 'react';
 import './FilterList.css';
-import FilterPanel from './FilterPanel';
 import { itemProps } from './items';
 
 import {

@@ -4,16 +4,11 @@
 
 
   .App-header {
-    display: flex;
-    background-color:white;
     color: white;
-    justify-content: space-between;
     padding:0.5rem;
     background-color: rgb(38, 0, 255);
-  
-    h1 {
-      margin-left:50rem;
-    }
+    text-align: center;
+
   } 
 
 
