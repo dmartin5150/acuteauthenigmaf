@@ -3,17 +3,14 @@ import React, {FC} from 'react';
 import Filter from './Filter';
 import './FilterPanel.css';
 import { itemProps } from './items';
+import { start } from 'repl';
 
 export type OptionType = {
     value: string;
     label: string;
   };
 
-const filterOptions: OptionType[]= [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-  ]
+
 
 
 type FilterPanelProps = {
@@ -33,7 +30,7 @@ const FilterPanel: FC<FilterPanelProps> = ({items, onResultsChanged}) => {
                   key={id}  
                   name={name} 
                   isDisabled={isDisabled}
-                   options={options ? options : [{label: 'All', value:'All'}]}
+                   options={options ? options : [{label:'',value:''}]}
                    onResultsChanged={onResultsChanged} />
             );
           })}

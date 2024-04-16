@@ -13,7 +13,7 @@ interface FilterProps {
     id: number;
     name:string;
     isDisabled:boolean;
-    options: SelectOptions[];
+    options: OptionType[];
     onResultsChanged: (id:number, value:string[]) => void;
 }
 
