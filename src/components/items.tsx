@@ -2,7 +2,7 @@
 import { ReactNode } from "react";
 import { OptionType } from "./FilterPanel";
 import { Option } from "react-dropdown";
-
+import { getOptions} from "../utilities/TAOoptions";
 
 export type itemProps = {
   id: number;
@@ -14,47 +14,51 @@ export type itemProps = {
   results?:string[]
 }
 
+const options:string[] = ['Result 1', 'Result 2', 'Result 3']
+
+
+
 export const items: itemProps[] = [
   {
     id: 1,
     name: "TAO",
     isDisabled:true,
     showResults:true,
-    options:[ {label: 'Result 1', value: '0'}, {label: 'Result 2', value: '1'}, {label: 'Result 3', value:'2'}]
+    options:getOptions(options)
   },
   {
     id: 2,
     name: "Department",
     isDisabled:true,
     showResults:true,
-    options:[ {label: 'Result 1', value: '0'}, {label: 'Result 2', value: '1'}, {label: 'Result 3', value:'2'}]
+    options:getOptions(options)
   },
   {
     id: 3,
     name: "Genus",
     isDisabled:true,
     showResults:true,
-    options:[ {label: 'Result 1', value: '0'}, {label: 'Result 2', value: '1'}, {label: 'Result 3', value:'2'}]
+    options:getOptions(options)
   },
   {
     id: 4,
     name: "Order Name",
     isDisabled:true,
     showResults:true,
-    options:[ {label: 'Result 1', value: '0'}, {label: 'Result 2', value: '1'}, {label: 'Result 3', value:'2'}]
+    options:getOptions(options)
   },
   {
     id: 5,
     name: "Bucket",
     isDisabled:true,
     showResults:true,
-    options:[ {label: 'Result 1', value: '0'}, {label: 'Result 2', value: '1'}, {label: 'Result 3', value:'2'}]
+    options:getOptions(options)
   },
   {
     id: 6,
     name: "Provider",
     isDisabled:true,
     showResults:true,
-    options:[ {label: 'Result 1', value: '0'}, {label: 'Result 2', value: '1'}, {label: 'Result 3', value:'2'}]
+    options:getOptions(options)
   },
 ];
