@@ -5,6 +5,7 @@ import { itemProps, items } from './components/items';
 import AppPanel from './components/AppPanel';
 import { OptionType } from './components/FilterPanel';
 import { SelectOptions } from './components/Filter';
+import getOptionDropDowns from './utilities/fetchData/getOptions';
 
 
 
@@ -15,6 +16,10 @@ export type Result = {
   results:string[];
 }
 
+export type TAOOption = {
+  id: number;
+  value: string;
+}
 
 
 
@@ -61,6 +66,23 @@ function App() {
   const onItemsChanged = (items:itemProps[]) => {
     setListItems(items);
   }
+
+  useEffect(() => {
+    const getOptionDD = async (items:itemProps[]) =>
+      {
+        try {
+          const options = await getOptionDropDowns(items)
+          return options
+        } catch (err) {
+          alert(err)
+        }
+      }
+      if (items && items.length > 0) {
+        const newItems = getOptionDD(items);
+        console.log(newItems)
+      }
+
+  },[items])
 
   const handleFilteredStatusChanged = (id:number, value: boolean) => {
     const newItems = listItems.map(item => {

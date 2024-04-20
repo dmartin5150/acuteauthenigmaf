@@ -24,41 +24,47 @@ export const items: itemProps[] = [
     name: "TAO",
     isDisabled:true,
     showResults:true,
-    options:getOptions(options)
+    options:getOptions(options),
+    results:[]
   },
   {
     id: 2,
     name: "Department",
     isDisabled:true,
     showResults:true,
-    options:getOptions(options)
+    options:getOptions(options),
+    results:[]
   },
   {
     id: 3,
     name: "Genus",
     isDisabled:true,
     showResults:true,
-    options:getOptions(options)
+    options:getOptions(options),
+    results:[]
   },
   {
     id: 4,
     name: "Order Name",
     isDisabled:true,
     showResults:true,
-    options:getOptions(options)
+    options:getOptions(options),
+    results:[]
   },
   {
     id: 5,
     name: "Bucket",
     isDisabled:true,
     showResults:true,
-    options:getOptions(options)
+    options:getOptions(options),
+    results:[]
   },
   {
     id: 6,
     name: "Provider",
     isDisabled:true,
     showResults:true,
-    options:getOptions(options)
+    options:getOptions(options),
+    results:[]
   },
 ];
