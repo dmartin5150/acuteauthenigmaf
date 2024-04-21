@@ -6,14 +6,16 @@ import AppPanel from './components/AppPanel';
 import { OptionType } from './components/FilterPanel';
 import { SelectOptions } from './components/Filter';
 import getOptionDropDowns from './utilities/fetchData/getOptions';
+import { getOptions,getOptionsWithId } from './utilities/TAOoptions';
 
 
+const options:string[] = ['Result 1', 'Result 2', 'Result 3']
+const defaultDropDowns:OptionType[] = getOptions(options)
 
-
-export type Result = {
+export type SelectedValue = {
   id: number;
   name: string;
-  results:string[];
+  selectedValue:string[];
 }
 
 export type TAOOption = {
@@ -23,44 +25,45 @@ export type TAOOption = {
 
 
 
-const selectedResults:Result[] = [
+const defaultSelectedValues:SelectedValue[] = [
 
   {
     id: 1,
     name: 'usedTAO',
-    results: []
+    selectedValue: []
   },
   {
     id: 2,
     name: 'deptName',
-    results: []
+    selectedValue: []
   },
   {
     id: 3,
     name: 'orderGenus',
-    results: []
+    selectedValue: []
   },
   {
     id: 4,
     name: 'orderName',
-    results: []
+    selectedValue: []
   },
   {
     id: 5,
     name: 'taoBucket',
-    results: []
+    selectedValue: []
   },
   {
     id: 6,
     name: 'orderingProvider',
-    results: []
+    selectedValue: []
   }]
 
 
 
 function App() {
   const [listItems, setListItems] = useState<itemProps[]>(items);
-  const [results, setResults] = useState<Result[]>(selectedResults)
+  const [selectedValues, setSelectedValues] = useState<SelectedValue[]>(defaultSelectedValues)
+  const [filterDropDowns, setFilterDropDowns] = useState<OptionType[]>([])
 
 
   const onItemsChanged = (items:itemProps[]) => {
@@ -71,18 +74,33 @@ function App() {
     const getOptionDD = async (items:itemProps[]) =>
       {
         try {
-          const options = await getOptionDropDowns(items)
-          return options
+          const options = await getOptionDropDowns(items);
+          const newOptionTypes = getOptionsWithId(options);
+          setFilterDropDowns(newOptionTypes);
+          console.log(options)
         } catch (err) {
           alert(err)
         }
       }
       if (items && items.length > 0) {
-        const newItems = getOptionDD(items);
-        console.log(newItems)
+        getOptionDD(items);
       }
 
-  },[items])
+  },[items]);
+
+
+  useEffect(() => {
+    
+    if (filterDropDowns && filterDropDowns.length > 0) {
+      const updatedItems = listItems.map((item) => {
+        return {...item, options: filterDropDowns}
+      })
+      setListItems(updatedItems)
+
+    }
+
+  },[filterDropDowns])
+
 
   const handleFilteredStatusChanged = (id:number, value: boolean) => {
     const newItems = listItems.map(item => {
@@ -106,19 +124,19 @@ function App() {
 
   const handleResultsChanged = (id:number, value:string[]) => {
     console.log('new values', id, ' ', value)
-    const newResults = results.map(result => {
-      if(result.id === id) {
-        return {...result, results: value}
+    const newResults = selectedValues.map(value => {
+      if(value.id === id) {
+        return {...value, selectedValue: value.selectedValue}
       }
-      return result
+      return value
     })
 
-    setResults(newResults);
+    setSelectedValues(newResults);
   }
 
   useEffect(() => {
-    console.log(results)
-  }, [results])
+    console.log(selectedValues)
+  }, [selectedValues])
 
 
 
@@ -138,7 +156,7 @@ function App() {
             onFilterStatusChanged={handleFilteredStatusChanged}
             onShowResultsChanged={handleShowResultsChanged}
           />
-          <AppPanel items={listItems} results={results} onResultsChanged={handleResultsChanged}/>
+          <AppPanel items={listItems} results={selectedValues} onResultsChanged={handleResultsChanged}/>
         </div>
       </div>
     </div>

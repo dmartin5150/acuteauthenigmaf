@@ -9,13 +9,13 @@ type ResultsProps = {
 
 
 const Results: FC<ResultsProps> = ({item}) => {
-    const {id, name, results} = item;
+    const {id, name, selectedValues} = item;
     return (
         <div className='results'>
             <label id={id.toString()} key={id}>
                 {name}
             </label>
-            <textarea name="postContent" rows={4} cols={40} value={results} />
+            <textarea name="postContent" rows={4} cols={40} value={selectedValues} />
         </div>
     )
 }

@@ -2,11 +2,11 @@ import React, {FC} from "react";
 import { itemProps } from "./items";
 import Results from "./Result";
 import './ResultsPanel.css';
-import { Result } from "../App";
+import { SelectedValue } from "../App";
 
 type ResultsPanelProps = {
     items: itemProps[];
-    results: Result[];
+    results: SelectedValue[];
 }
 
 

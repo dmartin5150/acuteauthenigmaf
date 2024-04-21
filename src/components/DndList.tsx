@@ -40,13 +40,14 @@ export const DndList: FC<DndProps> = (props) => {
     >
       <SortableContext items={items} strategy={strategy}>
         {items.map((item) => {
-          const { id, name, showResults, isDisabled} = item;
+          const { id, name,alias, showResults, isDisabled} = item;
           return (
               <SortableItem key={id} id={id} name={name} >
                 <div>
                   <FilterStatus 
                     id={id} 
                     name={name} 
+                    alias={alias}
                     isDisabled={isDisabled} 
                     showResults={showResults} 
                     onFilterStatusChanged={onFilterStatusChanged}
