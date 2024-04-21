@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import { itemProps } from './items';
-import { SelectedValueResult } from './items';
+import { ValueResult } from './items';
 import './Result.css';
 
 
@@ -9,7 +9,7 @@ type ResultsProps = {
 }
 
 
-const formatSelectedValues = (sItems: SelectedValueResult[]) => {
+const formatSelectedValues = (sItems: ValueResult[]) => {
     let formattedValues = '';
     if (sItems && sItems.length >0) {
         const addCR = sItems.map((item) => item.name + ' (' + item.count + ')\n')
@@ -20,10 +20,10 @@ const formatSelectedValues = (sItems: SelectedValueResult[]) => {
 
 
 const Results: FC<ResultsProps> = ({item}) => {
-    const {id, name, selectedValues} = item;
+    const {id, name, results} = item;
     let formattedValues:string = ''
-    if (selectedValues){
-        formattedValues = formatSelectedValues(selectedValues)
+    if (results){
+        formattedValues = formatSelectedValues(results)
     }
     return (
         <div className='results'>

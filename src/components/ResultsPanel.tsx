@@ -13,7 +13,7 @@ type ResultsPanelProps = {
 const ResultsPanel: FC<ResultsPanelProps> = ({items, results}) => {
     return (
         <div className='resultspanel'>
-        {items.map((item) => {
+        {items && items.map((item) => {
             const { id, name, isDisabled, options } = item;
             if(item.showResults) {
                 return (

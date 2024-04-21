@@ -55,12 +55,22 @@ const FilterList: FC<FilterListProps> = ({items, onItemsChanged,onFilterStatusCh
         const orderedItems = (currItems: itemProps[]) => {
           const activeIndex = currItems.findIndex((item) => item.id === active.id);
           const overIndex = currItems.findIndex((item) => item.id === over?.id);
-          return arrayMove(currItems, activeIndex, overIndex);
+          return arrayMove([...currItems], activeIndex, overIndex);
         };
         if (active.id !== over?.id) {
             setListItems(orderedItems);
         }
     };
+
+    useEffect(()=> {
+      if(items && items.length > 0) {
+        setListItems(items)
+      }
+    },[items])
+
+    useEffect(()=> {
+      console.log('filter list items', listItems)
+    },[listItems])
 
     useEffect(() => {
         onItemsChanged(listItems)

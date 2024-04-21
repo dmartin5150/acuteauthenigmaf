@@ -4,7 +4,6 @@ import FilterList from './components/FilterList';
 import { itemProps, items } from './components/items';
 import AppPanel from './components/AppPanel';
 import { OptionType } from './components/FilterPanel';
-import { SelectOptions } from './components/Filter';
 import { getOptions } from './utilities/TAOoptions';
 import getUpdatedItems from './utilities/fetchData/getUpdatedItems';
 
@@ -67,29 +66,26 @@ function App() {
 
 
   useEffect(() => {
-    const getOptionDD = async (items:itemProps[]) =>
+    const getNewItems = async (items:itemProps[]) =>
       {
         try {
           const updatedItems = await getUpdatedItems(items);
           if (updatedItems && updatedItems.length > 0){
             const itemsWithOptions = updatedItems.map((item) => {
               console.log('item', item)
-              if (item.selectedValues) {
-                const newOptions = getOptions(item.selectedValues)
+              if (item.dropDownValues) {
+                const newOptions = getOptions(item.dropDownValues)
                 return {...item, options:newOptions}
               }
               return item
             })
             setListItems(itemsWithOptions)
-            console.log('options =', itemsWithOptions)
           }
-
-
         } catch (err) {
           alert(err)
         }
       }
-        getOptionDD(items);
+        getNewItems(items);
   },[]);
 
 
@@ -132,19 +128,20 @@ function App() {
   }
 
   const handleResultsChanged = (id:number, value:string[]) => {
-    console.log('new values', id, ' ', value)
-    const newResults = selectedValues.map(value => {
-      if(value.id === id) {
-        return {...value, selectedValue: value.selectedValue}
-      }
-      return value
-    })
-
-    setSelectedValues(newResults);
+    const curIndex = listItems.findIndex((item) => item.id === id);
+    console.log('curIndex', curIndex, 'value ', value)
+    if (curIndex != -1) {
+        const curItem = listItems[curIndex];
+        console.log('cur Item', curItem)
+        // const updatedItem = {...curItem, selectedValues:value};
+        // const newListItems = {...listItems, ...updatedItem};
+        // setListItems(newListItems);
+        // console.log('updated selected value', newListItems);
+   }
   }
 
   useEffect(() => {
-    console.log(selectedValues)
+    console.log('selected values', selectedValues)
   }, [selectedValues])
 
 

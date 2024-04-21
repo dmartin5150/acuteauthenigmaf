@@ -4,7 +4,7 @@ import { OptionType } from "./FilterPanel";
 
 
 
-export type SelectedValueResult = {
+export type ValueResult = {
   name: string;
   count: string;
 }
@@ -18,7 +18,9 @@ export type itemProps = {
   isDisabled:boolean;
   showResults:boolean;
   options?:OptionType[],
-  selectedValues?:SelectedValueResult[]
+  selectedValues?:string[],
+  dropDownValues?:ValueResult[],
+  results?:ValueResult[]
 }
 
 
@@ -33,7 +35,9 @@ export const items: itemProps[] = [
     isDisabled:true,
     showResults:true,
     options:[],
-    selectedValues:[]
+    selectedValues:[],
+    dropDownValues:[],
+    results:[]
   },
   {
     id: 2,
@@ -42,7 +46,9 @@ export const items: itemProps[] = [
     isDisabled:true,
     showResults:true,
     options:[],
-    selectedValues:[]
+    selectedValues:[],
+    dropDownValues:[],
+    results:[]
   },
   {
     id: 3,
@@ -51,7 +57,9 @@ export const items: itemProps[] = [
     isDisabled:true,
     showResults:true,
     options:[],
-    selectedValues:[]
+    selectedValues:[],
+    dropDownValues:[],
+    results:[]
   },
   {
     id: 4,
@@ -60,7 +68,9 @@ export const items: itemProps[] = [
     isDisabled:true,
     showResults:true,
     options:[],
-    selectedValues:[]
+    selectedValues:[],
+    dropDownValues:[],
+    results:[]
   },
   {
     id: 5,
@@ -69,7 +79,9 @@ export const items: itemProps[] = [
     isDisabled:true,
     showResults:true,
     options:[],
-    selectedValues:[]
+    selectedValues:[],
+    dropDownValues:[],
+    results:[]
   },
   {
     id: 6,
@@ -78,6 +90,8 @@ export const items: itemProps[] = [
     isDisabled:true,
     showResults:true,
     options:[],
-    selectedValues:[]
+    selectedValues:[],
+    dropDownValues:[],
+    results:[]
   },
 ];
