@@ -128,21 +128,15 @@ function App() {
   }
 
   const handleResultsChanged = (id:number, value:string[]) => {
-    const curIndex = listItems.findIndex((item) => item.id === id);
-    console.log('curIndex', curIndex, 'value ', value)
+    const newItems = [...listItems];
+    const curIndex = newItems.findIndex((item) => item.id === id);
     if (curIndex != -1) {
-        const curItem = listItems[curIndex];
-        console.log('cur Item', curItem)
-        // const updatedItem = {...curItem, selectedValues:value};
-        // const newListItems = {...listItems, ...updatedItem};
-        // setListItems(newListItems);
-        // console.log('updated selected value', newListItems);
+        const curItem = newItems[curIndex];
+        const updatedItem = {...curItem, selectedValues:value};
+        newItems[curIndex] = updatedItem;
+        setListItems(newItems);
    }
   }
-
-  useEffect(() => {
-    console.log('selected values', selectedValues)
-  }, [selectedValues])
 
 
 
