@@ -1,5 +1,9 @@
-import { TAOOption } from "../../App";
 import { itemProps } from "../../components/items";
+
+type updatedItems = {
+  name: string;
+  items: itemProps[]
+}
 
 const getOptionDropDowns = async (items: itemProps[])=> {
       const response = await fetch("http://localhost:5001/alloptions", {
@@ -11,9 +15,8 @@ const getOptionDropDowns = async (items: itemProps[])=> {
 
       });
       if (response) {
-        const data: TAOOption[] = await response.json();
-        console.log('results = ', data)
-        return data
+        const data: updatedItems = await response.json();
+        return data.items
       }
       return []
   };

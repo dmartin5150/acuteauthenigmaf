@@ -6,6 +6,15 @@ import { getOptions} from "../utilities/TAOoptions";
 
 const options:string[] = ['Result 1', 'Result 2', 'Result 3']
 
+
+
+export type SelectedValueResult = {
+  name: string;
+  count: string;
+}
+
+
+
 export type itemProps = {
   id: number;
   name: string;
@@ -14,7 +23,7 @@ export type itemProps = {
   isDisabled:boolean;
   showResults:boolean;
   options?:OptionType[],
-  selectedValues?:string[]
+  selectedValues?:SelectedValueResult[]
 }
 
 

@@ -75,18 +75,14 @@ function App() {
       {
         try {
           const options = await getOptionDropDowns(items);
-          const newOptionTypes = getOptionsWithId(options);
-          setFilterDropDowns(newOptionTypes);
-          console.log(options)
+          setListItems(options)
+          console.log('options =', options)
         } catch (err) {
           alert(err)
         }
       }
-      if (items && items.length > 0) {
         getOptionDD(items);
-      }
-
-  },[items]);
+  },[]);
 
 
   useEffect(() => {
