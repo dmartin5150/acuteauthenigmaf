@@ -1,11 +1,12 @@
 import { itemProps } from "../../components/items";
 
+
 type updatedItems = {
   name: string;
   items: itemProps[]
 }
 
-const getOptionDropDowns = async (items: itemProps[])=> {
+const getUpdatedItems = async (items: itemProps[])=> {
       const response = await fetch("http://localhost:5001/alloptions", {
         method:'POST',
         headers: {
@@ -21,4 +22,4 @@ const getOptionDropDowns = async (items: itemProps[])=> {
       return []
   };
 
-  export default getOptionDropDowns;
+  export default getUpdatedItems;

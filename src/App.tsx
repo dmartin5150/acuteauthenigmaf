@@ -5,12 +5,11 @@ import { itemProps, items } from './components/items';
 import AppPanel from './components/AppPanel';
 import { OptionType } from './components/FilterPanel';
 import { SelectOptions } from './components/Filter';
-import getOptionDropDowns from './utilities/fetchData/getOptions';
-import { getOptions,getOptionsWithId } from './utilities/TAOoptions';
+import { getOptions } from './utilities/TAOoptions';
+import getUpdatedItems from './utilities/fetchData/getUpdatedItems';
 
 
-const options:string[] = ['Result 1', 'Result 2', 'Result 3']
-const defaultDropDowns:OptionType[] = getOptions(options)
+
 
 export type SelectedValue = {
   id: number;
@@ -66,17 +65,26 @@ function App() {
   const [filterDropDowns, setFilterDropDowns] = useState<OptionType[]>([])
 
 
-  const onItemsChanged = (items:itemProps[]) => {
-    setListItems(items);
-  }
 
   useEffect(() => {
     const getOptionDD = async (items:itemProps[]) =>
       {
         try {
-          const options = await getOptionDropDowns(items);
-          setListItems(options)
-          console.log('options =', options)
+          const updatedItems = await getUpdatedItems(items);
+          if (updatedItems && updatedItems.length > 0){
+            const itemsWithOptions = updatedItems.map((item) => {
+              console.log('item', item)
+              if (item.selectedValues) {
+                const newOptions = getOptions(item.selectedValues)
+                return {...item, options:newOptions}
+              }
+              return item
+            })
+            setListItems(itemsWithOptions)
+            console.log('options =', itemsWithOptions)
+          }
+
+
         } catch (err) {
           alert(err)
         }
@@ -96,6 +104,11 @@ function App() {
     }
 
   },[filterDropDowns])
+
+
+  const onItemsChanged = (items:itemProps[]) => {
+    setListItems(items);
+  }
 
 
   const handleFilteredStatusChanged = (id:number, value: boolean) => {
@@ -133,9 +146,6 @@ function App() {
   useEffect(() => {
     console.log(selectedValues)
   }, [selectedValues])
-
-
-
 
 
 

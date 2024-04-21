@@ -1,10 +1,6 @@
 
 import { ReactNode } from "react";
 import { OptionType } from "./FilterPanel";
-import { Option } from "react-dropdown";
-import { getOptions} from "../utilities/TAOoptions";
-
-const options:string[] = ['Result 1', 'Result 2', 'Result 3']
 
 
 
@@ -12,7 +8,6 @@ export type SelectedValueResult = {
   name: string;
   count: string;
 }
-
 
 
 export type itemProps = {
@@ -37,7 +32,7 @@ export const items: itemProps[] = [
     alias:"usedTAO",
     isDisabled:true,
     showResults:true,
-    options:getOptions(options),
+    options:[],
     selectedValues:[]
   },
   {
@@ -46,7 +41,7 @@ export const items: itemProps[] = [
     alias: "deptName",
     isDisabled:true,
     showResults:true,
-    options:getOptions(options),
+    options:[],
     selectedValues:[]
   },
   {
@@ -55,7 +50,7 @@ export const items: itemProps[] = [
     alias:"orderGenus",
     isDisabled:true,
     showResults:true,
-    options:getOptions(options),
+    options:[],
     selectedValues:[]
   },
   {
@@ -64,7 +59,7 @@ export const items: itemProps[] = [
     alias:"orderName",
     isDisabled:true,
     showResults:true,
-    options:getOptions(options),
+    options:[],
     selectedValues:[]
   },
   {
@@ -73,7 +68,7 @@ export const items: itemProps[] = [
     alias:"taoBucket",
     isDisabled:true,
     showResults:true,
-    options:getOptions(options),
+    options:[],
     selectedValues:[]
   },
   {
@@ -82,7 +77,7 @@ export const items: itemProps[] = [
     alias:"orderingProvider",
     isDisabled:true,
     showResults:true,
-    options:getOptions(options),
+    options:[],
     selectedValues:[]
   },
 ];

@@ -19,7 +19,6 @@ const FilterStatus: FC<FilterStatusProps> = (props) => {
 
 
     const changedEnabled = () => {
-        console.log('target')
         setIsEnabled(!isEnabled)
     }
 
@@ -32,12 +31,10 @@ const FilterStatus: FC<FilterStatusProps> = (props) => {
     },[])
 
     useEffect(() => {
-        console.log('id = ', filterId, 'isEnabled = ', isEnabled);
         onFilterStatusChanged(id, isEnabled);
     },[isEnabled,id])
 
     useEffect(()=> {
-        console.log('id = ', filterId, 'show results = ', showResults);
         onShowResultsChanged(id, showResults);
     },[showResults,id])
 
