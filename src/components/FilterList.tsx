@@ -43,14 +43,14 @@ const FilterList: FC<FilterListProps> = ({items, onItemsChanged,onFilterStatusCh
     const keyboardSensor = useSensor(KeyboardSensor, {
         coordinateGetter: sortableKeyboardCoordinates,
       });
-      const pointerSensor = useSensor(PointerSensor, {
+    const pointerSensor = useSensor(PointerSensor, {
         activationConstraint: {
           distance: 8, // Enable item onClick function
         },
       });
-      const mouseSensor = useSensor(MouseSensor);
-      const sensors = useSensors(keyboardSensor, pointerSensor, mouseSensor);
-      const onDragEnd = (event: DragEndEvent) => {
+    const mouseSensor = useSensor(MouseSensor);
+    const sensors = useSensors(keyboardSensor, pointerSensor, mouseSensor);
+    const onDragEnd = (event: DragEndEvent) => {
         const { active, over } = event;
         const orderedItems = (currItems: itemProps[]) => {
           const activeIndex = currItems.findIndex((item) => item.id === active.id);
@@ -58,27 +58,27 @@ const FilterList: FC<FilterListProps> = ({items, onItemsChanged,onFilterStatusCh
           return arrayMove([...currItems], activeIndex, overIndex);
         };
         if (active.id !== over?.id) {
-            setListItems(orderedItems);
+            onItemsChanged(orderedItems(items));
         }
     };
 
-    useEffect(()=> {
-      if(items && items.length > 0) {
-        setListItems(items)
-      }
-    },[items])
+    // useEffect(()=> {
+    //   if(items && items.length > 0) {
+    //     setListItems(items)
+    //   }
+    // },[items])
 
-    useEffect(()=> {
-      console.log('filter list items', listItems)
-    },[listItems])
+    // useEffect(()=> {
+    //   console.log('filter list items', listItems)
+    // },[listItems])
 
-    useEffect(() => {
-        onItemsChanged(listItems)
-    },[listItems])
+    // useEffect(() => {
+    //     onItemsChanged(listItems)
+    // },[listItems])
       
-    const updateItem = (itemId:number) => {
-        console.log(itemId)
-    }
+    // const updateItem = (itemId:number) => {
+    //     console.log(itemId)
+    // }
 
 
 
@@ -91,7 +91,7 @@ const FilterList: FC<FilterListProps> = ({items, onItemsChanged,onFilterStatusCh
                 onDragEnd={onDragEnd}
                 onFilterStatusChanged={onFilterStatusChanged}
                 onShowResultsChanged={onShowResultsChanged}
-                items={listItems}
+                items={items}
                 strategy={verticalListSortingStrategy}
                 modifiers={[restrictToParentElement, restrictToVerticalAxis]}
                 collisionDetection={closestCenter}

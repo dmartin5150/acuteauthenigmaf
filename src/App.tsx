@@ -9,7 +9,6 @@ import getUpdatedItems from './utilities/fetchData/getUpdatedItems';
 
 
 
-
 export type SelectedValue = {
   id: number;
   name: string;
@@ -60,13 +59,16 @@ const defaultSelectedValues:SelectedValue[] = [
 
 function App() {
   const [listItems, setListItems] = useState<itemProps[]>(items);
+  const [viewItems, setViewItems] = useState<itemProps[]>(items)
   const [selectedValues, setSelectedValues] = useState<SelectedValue[]>(defaultSelectedValues)
   const [filterDropDowns, setFilterDropDowns] = useState<OptionType[]>([])
 
 
+  
 
+ 
   useEffect(() => {
-    const getNewItems = async (items:itemProps[]) =>
+    const getInitialItems = async (items:itemProps[]) =>
       {
         try {
           const updatedItems = await getUpdatedItems(items);
@@ -85,57 +87,89 @@ function App() {
           alert(err)
         }
       }
-        getNewItems(items);
+      getInitialItems(listItems);
   },[]);
 
 
-  useEffect(() => {
-    
-    if (filterDropDowns && filterDropDowns.length > 0) {
-      const updatedItems = listItems.map((item) => {
-        return {...item, options: filterDropDowns}
+  
+  const onItemsChanged = async (items:itemProps[]) => {
+    const updatedItems = await getUpdatedItems(items);
+    if (updatedItems && updatedItems.length > 0){
+      const itemsWithOptions = updatedItems.map((item) => {
+        console.log('item', item)
+        if (item.dropDownValues) {
+          const newOptions = getOptions(item.dropDownValues)
+          return {...item, options:newOptions}
+        }
+        return item
       })
-      setListItems(updatedItems)
-
+      setListItems(itemsWithOptions);
     }
-
-  },[filterDropDowns])
-
-
-  const onItemsChanged = (items:itemProps[]) => {
-    setListItems(items);
   }
 
 
-  const handleFilteredStatusChanged = (id:number, value: boolean) => {
+  const handleFilteredStatusChanged = async (id:number, value: boolean) => {
     const newItems = listItems.map(item => {
         if (item.id === id) {
             return { ...item, isDisabled: !value };
         }
         return item;
     });
-    setListItems(newItems)
+    const updatedItems = await getUpdatedItems(newItems);
+    if (updatedItems && updatedItems.length > 0){
+      const itemsWithOptions = updatedItems.map((item) => {
+        console.log('item', item)
+        if (item.dropDownValues) {
+          const newOptions = getOptions(item.dropDownValues)
+          return {...item, options:newOptions}
+        }
+        return item
+      })
+      setListItems(itemsWithOptions)
+    }
   }
 
-  const handleShowResultsChanged = (id:number, value: boolean) => {
+  const handleShowResultsChanged = async (id:number, value: boolean) => {
     const newItems = listItems.map(item => {
       if (item.id === id) {
           return { ...item, showResults: value };
       }
       return item;
-  });
-  setListItems(newItems)
+    });
+    const updatedItems = await getUpdatedItems(newItems);
+    if (updatedItems && updatedItems.length > 0) {
+      const itemsWithOptions = updatedItems.map((item) => {
+      console.log('item', item)
+      if (item.dropDownValues) {
+        const newOptions = getOptions(item.dropDownValues)
+        return {...item, options:newOptions}
+      }
+      return item
+    })
+    setListItems(updatedItems)
+    }
   }
 
-  const handleResultsChanged = (id:number, value:string[]) => {
+  const handleResultsChanged = async (id:number, value:string[]) => {
     const newItems = [...listItems];
     const curIndex = newItems.findIndex((item) => item.id === id);
     if (curIndex != -1) {
         const curItem = newItems[curIndex];
         const updatedItem = {...curItem, selectedValues:value};
         newItems[curIndex] = updatedItem;
-        setListItems(newItems);
-   }
+        const updatedItems = await getUpdatedItems(newItems);
+        if (updatedItems && updatedItems.length > 0){
+          const itemsWithOptions = updatedItems.map((item) => {
+            console.log('item', item)
+            if (item.dropDownValues) {
+              const newOptions = getOptions(item.dropDownValues)
+              return {...item, options:newOptions}
+            }
+            return item
+          })
+          setListItems(updatedItems);
+        }
+    }
   }
 
 
