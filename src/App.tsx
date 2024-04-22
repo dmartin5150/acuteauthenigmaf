@@ -59,9 +59,7 @@ const defaultSelectedValues:SelectedValue[] = [
 
 function App() {
   const [listItems, setListItems] = useState<itemProps[]>(items);
-  const [viewItems, setViewItems] = useState<itemProps[]>(items)
   const [selectedValues, setSelectedValues] = useState<SelectedValue[]>(defaultSelectedValues)
-  const [filterDropDowns, setFilterDropDowns] = useState<OptionType[]>([])
 
 
   
@@ -146,14 +144,14 @@ function App() {
       }
       return item
     })
-    setListItems(updatedItems)
+    setListItems(itemsWithOptions)
     }
   }
 
   const handleResultsChanged = async (id:number, value:string[]) => {
     const newItems = [...listItems];
     const curIndex = newItems.findIndex((item) => item.id === id);
-    if (curIndex != -1) {
+    if (curIndex !== -1) {
         const curItem = newItems[curIndex];
         const updatedItem = {...curItem, selectedValues:value};
         newItems[curIndex] = updatedItem;
