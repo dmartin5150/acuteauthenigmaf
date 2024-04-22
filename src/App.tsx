@@ -22,47 +22,9 @@ export type TAOOption = {
 
 
 
-const defaultSelectedValues:SelectedValue[] = [
-
-  {
-    id: 1,
-    name: 'usedTAO',
-    selectedValue: []
-  },
-  {
-    id: 2,
-    name: 'deptName',
-    selectedValue: []
-  },
-  {
-    id: 3,
-    name: 'orderGenus',
-    selectedValue: []
-  },
-  {
-    id: 4,
-    name: 'orderName',
-    selectedValue: []
-  },
-  {
-    id: 5,
-    name: 'taoBucket',
-    selectedValue: []
-  },
-  {
-    id: 6,
-    name: 'orderingProvider',
-    selectedValue: []
-  }]
-
-
-
 function App() {
   const [listItems, setListItems] = useState<itemProps[]>(items);
-  const [selectedValues, setSelectedValues] = useState<SelectedValue[]>(defaultSelectedValues)
 
-
-  
 
  
   useEffect(() => {
@@ -172,7 +134,6 @@ function App() {
   }
 
 
-
   return (
     <div className="App">
       <header className="App-header">
@@ -186,7 +147,7 @@ function App() {
             onFilterStatusChanged={handleFilteredStatusChanged}
             onShowResultsChanged={handleShowResultsChanged}
           />
-          <AppPanel items={listItems} results={selectedValues} onResultsChanged={handleResultsChanged}/>
+          <AppPanel items={listItems}  onResultsChanged={handleResultsChanged}/>
         </div>
       </div>
     </div>

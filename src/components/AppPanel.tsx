@@ -6,16 +6,15 @@ import { SelectedValue } from '../App';
 
 type AppPanelProps = {
     items: itemProps[];
-    results: SelectedValue[];
     onResultsChanged: (id:number, value:string[]) => void
 }
 
 
-const AppPanel: FC<AppPanelProps> = ({items,results, onResultsChanged}) => {
+const AppPanel: FC<AppPanelProps> = ({items, onResultsChanged}) => {
     return (
         <div className="'apppanel">
             <FilterPanel items={items} onResultsChanged={onResultsChanged}/>
-            <ResultsPanel items={items} results={results} />
+            <ResultsPanel items={items}  />
         </div>
     )
 }

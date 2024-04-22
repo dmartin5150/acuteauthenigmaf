@@ -6,11 +6,10 @@ import { SelectedValue } from "../App";
 
 type ResultsPanelProps = {
     items: itemProps[];
-    results: SelectedValue[];
 }
 
 
-const ResultsPanel: FC<ResultsPanelProps> = ({items, results}) => {
+const ResultsPanel: FC<ResultsPanelProps> = ({items}) => {
     return (
         <div className='resultspanel'>
         {items && items.map((item) => {
