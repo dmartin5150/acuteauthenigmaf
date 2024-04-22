@@ -140,6 +140,7 @@ function App() {
       console.log('item', item)
       if (item.dropDownValues) {
         const newOptions = getOptions(item.dropDownValues)
+        console.log('newoptions', newOptions[1])
         return {...item, options:newOptions}
       }
       return item
@@ -165,7 +166,7 @@ function App() {
             }
             return item
           })
-          setListItems(updatedItems);
+          setListItems(itemsWithOptions);
         }
     }
   }
