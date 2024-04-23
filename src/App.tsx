@@ -3,7 +3,6 @@ import './App.css';
 import FilterList from './components/FilterList';
 import { itemProps, items } from './components/items';
 import AppPanel from './components/AppPanel';
-import { OptionType } from './components/FilterPanel';
 import { getOptions } from './utilities/TAOoptions';
 import getUpdatedItems from './utilities/fetchData/getUpdatedItems';
 
@@ -51,21 +50,27 @@ function App() {
   },[]);
 
 
-  
-  const onItemsChanged = async (items:itemProps[]) => {
+  const getList = async(items:itemProps[]) => {
     const updatedItems = await getUpdatedItems(items);
     if (updatedItems && updatedItems.length > 0){
       const itemsWithOptions = updatedItems.map((item) => {
-        console.log('item', item)
         if (item.dropDownValues) {
           const newOptions = getOptions(item.dropDownValues)
           return {...item, options:newOptions}
         }
         return item
       })
+      return itemsWithOptions;
+    }
+  }
+  
+  const handleItemsChanged = async (items:itemProps[]) => {
+    const itemsWithOptions = await getList(items)
+    if (itemsWithOptions) {
       setListItems(itemsWithOptions);
     }
   }
+
 
 
   const handleFilteredStatusChanged = async (id:number, value: boolean) => {
@@ -75,19 +80,13 @@ function App() {
         }
         return item;
     });
-    const updatedItems = await getUpdatedItems(newItems);
-    if (updatedItems && updatedItems.length > 0){
-      const itemsWithOptions = updatedItems.map((item) => {
-        console.log('item', item)
-        if (item.dropDownValues) {
-          const newOptions = getOptions(item.dropDownValues)
-          return {...item, options:newOptions}
-        }
-        return item
-      })
+    const itemsWithOptions = await getList(newItems);
+    if(itemsWithOptions) {
       setListItems(itemsWithOptions)
     }
+    
   }
+  
 
   const handleShowResultsChanged = async (id:number, value: boolean) => {
     const newItems = listItems.map(item => {
@@ -96,18 +95,9 @@ function App() {
       }
       return item;
     });
-    const updatedItems = await getUpdatedItems(newItems);
-    if (updatedItems && updatedItems.length > 0) {
-      const itemsWithOptions = updatedItems.map((item) => {
-      console.log('item', item)
-      if (item.dropDownValues) {
-        const newOptions = getOptions(item.dropDownValues)
-        console.log('newoptions', newOptions[1])
-        return {...item, options:newOptions}
-      }
-      return item
-    })
-    setListItems(itemsWithOptions)
+    const itemsWithOptions = await getList(newItems);
+    if(itemsWithOptions) {
+      setListItems(itemsWithOptions)
     }
   }
 
@@ -118,20 +108,13 @@ function App() {
         const curItem = newItems[curIndex];
         const updatedItem = {...curItem, selectedValues:value};
         newItems[curIndex] = updatedItem;
-        const updatedItems = await getUpdatedItems(newItems);
-        if (updatedItems && updatedItems.length > 0){
-          const itemsWithOptions = updatedItems.map((item) => {
-            console.log('item', item)
-            if (item.dropDownValues) {
-              const newOptions = getOptions(item.dropDownValues)
-              return {...item, options:newOptions}
-            }
-            return item
-          })
+        const itemsWithOptions = await getList(newItems);
+        if(itemsWithOptions) {
           setListItems(itemsWithOptions);
         }
-    }
+      }
   }
+  
 
 
   return (
@@ -143,7 +126,7 @@ function App() {
         <div className='App-filters'>
           <FilterList 
             items={listItems} 
-            onItemsChanged={onItemsChanged} 
+            onItemsChanged={handleItemsChanged} 
             onFilterStatusChanged={handleFilteredStatusChanged}
             onShowResultsChanged={handleShowResultsChanged}
           />
