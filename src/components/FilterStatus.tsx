@@ -1,4 +1,4 @@
-import React, {FC, useState, useEffect} from "react";
+import {FC, useState, useEffect} from "react";
 
 import './FilterStatus.css'
 import { itemProps } from "./items";
@@ -14,7 +14,7 @@ const FilterStatus: FC<FilterStatusProps> = (props) => {
     const {name, id, onFilterStatusChanged, onShowResultsChanged} = props;
     const [isEnabled,setIsEnabled] = useState<boolean>(false);
     const [showResults, setShowResults] = useState<boolean>(true);
-    const [filterId, setFilterId] = useState<string>("")
+
 
 
 
@@ -26,9 +26,7 @@ const FilterStatus: FC<FilterStatusProps> = (props) => {
         setShowResults(!showResults);
     }
 
-    useEffect(() => {
-        setFilterId(id.toString());
-    },[])
+
 
     useEffect(() => {
         onFilterStatusChanged(id, isEnabled);

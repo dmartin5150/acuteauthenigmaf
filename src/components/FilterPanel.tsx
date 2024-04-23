@@ -1,9 +1,9 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 
 import Filter from './Filter';
 import './FilterPanel.css';
 import { itemProps } from './items';
-import { start } from 'repl';
+
 
 export type OptionType = {
     value: string;

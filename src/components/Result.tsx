@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import { itemProps } from './items';
 import { ValueResult } from './items';
 import './Result.css';

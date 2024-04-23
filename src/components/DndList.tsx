@@ -1,5 +1,5 @@
-import { FC, ReactNode } from "react";
-import { DndContext, DndContextProps, UniqueIdentifier } from "@dnd-kit/core";
+import { FC } from "react";
+import { DndContext, DndContextProps } from "@dnd-kit/core";
 import { SortableContext, SortingStrategy } from "@dnd-kit/sortable";
 import { SortableItem } from "./SortableItem";
 import FilterStatus from "./FilterStatus";

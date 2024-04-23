@@ -1,8 +1,8 @@
-import React, {FC} from "react";
+import  {FC} from "react";
 import { itemProps } from "./items";
 import Results from "./Result";
 import './ResultsPanel.css';
-import { SelectedValue } from "../App";
+
 
 type ResultsPanelProps = {
     items: itemProps[];
@@ -13,7 +13,7 @@ const ResultsPanel: FC<ResultsPanelProps> = ({items}) => {
     return (
         <div className='resultspanel'>
         {items && items.map((item) => {
-            const { id, name, isDisabled, options } = item;
+            const { id} = item;
             if(item.showResults) {
                 return (
                     <div id={id.toString()} key={id}>
@@ -21,6 +21,10 @@ const ResultsPanel: FC<ResultsPanelProps> = ({items}) => {
                     </div>
                 );
             }
+            return (
+                <div id={id.toString()} key={id}>
+                </div>
+            );
           })}
         </div>
 

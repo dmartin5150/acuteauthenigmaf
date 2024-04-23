@@ -1,8 +1,7 @@
 import { FC, ReactNode} from 'react';
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-// import { DndItemProps } from "./DndList";
-import { itemProps } from "./items";
+
 
 type SortableItemProps = {
   id:number;

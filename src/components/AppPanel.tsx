@@ -2,7 +2,7 @@ import {FC} from 'react';
 import FilterPanel from "./FilterPanel";
 import ResultsPanel from "./ResultsPanel";
 import { itemProps } from "./items";
-import { SelectedValue } from '../App';
+
 
 type AppPanelProps = {
     items: itemProps[];

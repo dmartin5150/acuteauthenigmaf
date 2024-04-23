@@ -1,5 +1,5 @@
-import React, {FC, useState, useEffect} from 'react';
-import Select, {SingleValue, MultiValue, ActionMeta}  from 'react-select';
+import  {FC, useState, useEffect} from 'react';
+import Select, { MultiValue, ActionMeta}  from 'react-select';
 import './Filter.css';
 import { OptionType } from './FilterPanel';
 

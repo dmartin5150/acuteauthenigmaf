@@ -8,16 +8,8 @@ import getUpdatedItems from './utilities/fetchData/getUpdatedItems';
 
 
 
-export type SelectedValue = {
-  id: number;
-  name: string;
-  selectedValue:string[];
-}
 
-export type TAOOption = {
-  id: number;
-  value: string;
-}
+
 
 
 

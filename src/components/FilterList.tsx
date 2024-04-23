@@ -1,4 +1,4 @@
-import {FC, useState, useEffect} from 'react';
+import {FC} from 'react';
 import './FilterList.css';
 import { itemProps } from './items';
 
@@ -26,7 +26,7 @@ import {
   
   
   import { DndList } from './DndList';
-import { on } from 'events';
+
 
 
 type FilterListProps = {
@@ -39,7 +39,7 @@ type FilterListProps = {
 
 
 const FilterList: FC<FilterListProps> = ({items, onItemsChanged,onFilterStatusChanged,onShowResultsChanged}) => {
-    const [listItems, setListItems] = useState(items);
+
     const keyboardSensor = useSensor(KeyboardSensor, {
         coordinateGetter: sortableKeyboardCoordinates,
       });
@@ -61,24 +61,6 @@ const FilterList: FC<FilterListProps> = ({items, onItemsChanged,onFilterStatusCh
             onItemsChanged(orderedItems(items));
         }
     };
-
-    // useEffect(()=> {
-    //   if(items && items.length > 0) {
-    //     setListItems(items)
-    //   }
-    // },[items])
-
-    // useEffect(()=> {
-    //   console.log('filter list items', listItems)
-    // },[listItems])
-
-    // useEffect(() => {
-    //     onItemsChanged(listItems)
-    // },[listItems])
-      
-    // const updateItem = (itemId:number) => {
-    //     console.log(itemId)
-    // }
 
 
 
