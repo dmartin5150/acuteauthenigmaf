@@ -12,20 +12,20 @@ type ResultsPanelProps = {
 const ResultsPanel: FC<ResultsPanelProps> = ({items}) => {
     return (
         <div className='resultspanel'>
-        {items && items.map((item) => {
-            const { id} = item;
-            if(item.showResults) {
+            {items && items.map((item) => {
+                const { id} = item;
+                if(item.showResults) {
+                    return (
+                        <div id={id.toString()} key={id}>
+                            <Results item={item}  />
+                        </div>
+                    );
+                }
                 return (
                     <div id={id.toString()} key={id}>
-                        <Results item={item}  />
                     </div>
                 );
-            }
-            return (
-                <div id={id.toString()} key={id}>
-                </div>
-            );
-          })}
+            })}
         </div>
 
     )

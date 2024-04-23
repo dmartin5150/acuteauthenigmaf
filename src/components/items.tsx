@@ -3,7 +3,6 @@ import { ReactNode } from "react";
 import { OptionType } from "./FilterPanel";
 
 
-
 export type ValueResult = {
   name: string;
   count: string;
@@ -22,8 +21,6 @@ export type itemProps = {
   dropDownValues?:ValueResult[],
   results?:ValueResult[]
 }
-
-
 
 
 

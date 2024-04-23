@@ -12,7 +12,7 @@ type AppPanelProps = {
 
 const AppPanel: FC<AppPanelProps> = ({items, onResultsChanged}) => {
     return (
-        <div className="'apppanel">
+        <div className="'app-panel">
             <FilterPanel items={items} onResultsChanged={onResultsChanged}/>
             <ResultsPanel items={items}  />
         </div>

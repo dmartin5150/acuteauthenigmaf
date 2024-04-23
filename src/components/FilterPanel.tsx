@@ -11,8 +11,6 @@ export type OptionType = {
   };
 
 
-
-
 type FilterPanelProps = {
     items: itemProps[];
     onResultsChanged: (id:number, value:string[]) => void;
