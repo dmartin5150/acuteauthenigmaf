@@ -17,44 +17,38 @@ function App() {
   const [listItems, setListItems] = useState<itemProps[]>(items);
 
 
+  const getList = async(items:itemProps[]) => {
+    try {
+      const updatedItems = await getUpdatedItems(items);
+      if (updatedItems && updatedItems.length > 0){
+        const itemsWithOptions = updatedItems.map((item) => {
+          if (item.dropDownValues) {
+            const newOptions = getOptions(item.dropDownValues)
+            return {...item, options:newOptions}
+          }
+          return item
+        })
+        return itemsWithOptions;
+      }
+    } catch (err) {
+      alert(err)
+    }
+
+  }
  
   useEffect(() => {
     const getInitialItems = async (items:itemProps[]) =>
       {
-        try {
-          const updatedItems = await getUpdatedItems(items);
-          if (updatedItems && updatedItems.length > 0){
-            const itemsWithOptions = updatedItems.map((item) => {
-              console.log('item', item)
-              if (item.dropDownValues) {
-                const newOptions = getOptions(item.dropDownValues)
-                return {...item, options:newOptions}
-              }
-              return item
-            })
-            setListItems(itemsWithOptions)
-          }
-        } catch (err) {
-          alert(err)
+        const itemsWithOptions = await getList(items);
+        if(itemsWithOptions) {
+          setListItems(itemsWithOptions);
         }
       }
-      getInitialItems(listItems);
+      getInitialItems(items);
   },[]);
 
 
-  const getList = async(items:itemProps[]) => {
-    const updatedItems = await getUpdatedItems(items);
-    if (updatedItems && updatedItems.length > 0){
-      const itemsWithOptions = updatedItems.map((item) => {
-        if (item.dropDownValues) {
-          const newOptions = getOptions(item.dropDownValues)
-          return {...item, options:newOptions}
-        }
-        return item
-      })
-      return itemsWithOptions;
-    }
-  }
+
   
   const handleItemsChanged = async (items:itemProps[]) => {
     const itemsWithOptions = await getList(items)

@@ -11,7 +11,7 @@ type SortableItemProps = {
 }
 
 export const SortableItem: FC<SortableItemProps> = (props) => {
-  const { id,name, children, disabled} = props;
+  const { id, children, disabled} = props;
   const {
     attributes,
     listeners,
